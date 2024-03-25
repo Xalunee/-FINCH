@@ -16,12 +16,18 @@ const Card = styled.div`
 
   background-color: #ffffff;
   border-radius: 5px;
+
+  @media only screen and (min-width: 768px) {
+    width: 445px;
+  }
 `;
 
 const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  height: 40px;
 `;
 
 const CardTitle = styled.h2`
