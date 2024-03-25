@@ -1,25 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useMemo, useState } from "react";
+import TicketCard from "./components/TicketCard";
+import GlobalStyles from "./styles/global";
+import { CellsContext } from './context/CellsContext';
 
 function App() {
+  const defaultState = {
+    cells1: [],
+    cells2: [],
+  };
+  const [cells, setCells] = useState(defaultState);
+  const value = useMemo(() => ({ cells, setCells }), [cells]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CellsContext.Provider value={value}>
+        <TicketCard />
+      </CellsContext.Provider>
+      <GlobalStyles />
+    </>
   );
 }
 
