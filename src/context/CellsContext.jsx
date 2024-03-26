@@ -1,3 +1,3 @@
 import { createContext } from 'react';
 
-export const CellsContext = createContext({});
+export const CellsContext = createContext();

@@ -57,7 +57,7 @@ const TextResult = styled.p`
 
 function TicketCard() {
   const [isTicketWon, setIsTicketWon] = useState<boolean | null>(null); // Состояние выигрыша билета
-  const { cells, setCells }: any = useContext(CellsContext);
+  const { cells, setCells } = useContext(CellsContext);
 
   // Функция для генерации и становки рандомных чисел при нажатии на кнопку
   const randomizeNumbers = () => {

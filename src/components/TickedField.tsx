@@ -17,7 +17,7 @@ interface IProps {
 }
 
 function TicketField({ maxMarkCount, cellsCount, nameCell }: IProps) {
-  const { cells }: any = useContext(CellsContext);
+  const { cells } = useContext(CellsContext);
   // Состоянние количества выбранных ячеек
   const [markedCounter, setMarkedCounter] = useState(cells[nameCell].length);
 
