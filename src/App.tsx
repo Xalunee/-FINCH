@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import TicketCard from "./components/TicketCard";
 import GlobalStyles from "./styles/global";
-import { CellsContext } from './context/CellsContext';
+import { CellsContext } from "./context/CellsContext";
 
 function App() {
   const defaultState = {
@@ -9,7 +9,7 @@ function App() {
     cells2: [],
   };
   const [cells, setCells] = useState(defaultState);
-  const value = useMemo(() => ({ cells, setCells }), [cells]);
+  const value = { cells, setCells };
 
   return (
     <>

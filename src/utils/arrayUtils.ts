@@ -4,7 +4,11 @@ export const generateCells = (length: number): number[] => {
 };
 
 // Создание массива с уникальными числами
-export const getUniqueRandomNumbers = (length: number, min: number, max: number) => {
+export const getUniqueRandomNumbers = (
+  length: number,
+  min: number,
+  max: number
+) => {
   const numbers = new Set<number>();
   while (numbers.size < length) {
     numbers.add(Math.floor(Math.random() * (max - min + 1)) + min);
@@ -14,11 +18,5 @@ export const getUniqueRandomNumbers = (length: number, min: number, max: number)
 };
 
 // Функция, считающая совпадения в массивах
-export const intersectionCount = (arr1: number[], arr2: number[]): number => {
-  let count = 0;
-  for (const item of arr1) {
-    if (arr2.includes(item)) count += 1;
-  }
-
-  return count;
-};
+export const intersectionCount = (arr1: number[], arr2: number[]): number =>
+  arr1.reduce((acc, item) => (arr2.includes(item) ? acc + 1 : acc), 0);

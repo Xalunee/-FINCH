@@ -6,11 +6,6 @@ export default createGlobalStyle`
     padding: 0;
   }
 
-  *::before,
-  *::after {
-    //
-  }
-
   body {
     display: flex;
     justify-content: center;

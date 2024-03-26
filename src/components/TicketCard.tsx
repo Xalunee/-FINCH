@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import TicketField from "./TickedField";
-import ButtonRandomize from './ButtonRandomize';
+import ButtonRandomize from "./ButtonRandomize";
 import { useContext, useState } from "react";
 import { CellsContext } from "../context/CellsContext";
-import sendRequest from "../utils/apiUtils";
-import { getUniqueRandomNumbers, intersectionCount } from "../utils/arrayUtils";
+import { getUniqueRandomNumbers } from "../utils/arrayUtils";
+import { calculateResult } from "../utils/lottery";
 
 // Стили для компонентов
 const Card = styled.div`
@@ -60,38 +60,7 @@ const TextResult = styled.p`
 
 function TicketCard() {
   const [isTicketWon, setIsTicketWon] = useState<boolean | null>(null); // Состояние выигрыша билета
-  const { cells, setCells }: any = useContext(CellsContext); // Выбранные поля, установка этих полей
-
-  // Вычисление результата
-  const calculateResult =
-    (cells: { cells1: number[]; cells2: number[] }) => () => {
-      const { cells1, cells2 } = cells;
-      const arr1 = getUniqueRandomNumbers(8, 1, 19);
-      const arr2 = getUniqueRandomNumbers(1, 1, 2);
-
-      const matchesFirstField = intersectionCount(cells1, arr1);
-      const matchesSecondField = intersectionCount(cells2, arr2);
-
-      const isTicketWon =
-        matchesFirstField >= 4 ||
-        (matchesFirstField >= 3 && matchesSecondField === 1);
-
-      // Лог для теста корректности работы - совпадения первого поля, совпадения второго поля, статус выигрыша
-      console.log(matchesFirstField, matchesSecondField, isTicketWon);
-
-      // Отправка данных на апи
-      sendRequest("https://fakegosloto/api", {
-        firstField: cells1,
-        secondField: cells2,
-        isTicketWon,
-      });
-
-      if (isTicketWon) {
-        setIsTicketWon(true);
-      } else {
-        setIsTicketWon(false);
-      }
-    };
+  const { cells, setCells }: any = useContext(CellsContext);
 
   // Функция для генерации и становки рандомных чисел при нажатии на кнопку
   const randomizeNumbers = () => {
@@ -132,7 +101,7 @@ function TicketCard() {
         <p>Отметьте 1 число.</p>
       </NameField>
       <TicketField maxMarkCount={1} cellsCount={2} nameCell="cells2" />
-      <ButtonResult onClick={calculateResult(cells)}>
+      <ButtonResult onClick={calculateResult(cells, setIsTicketWon)}>
         Показать результат
       </ButtonResult>
     </Card>
