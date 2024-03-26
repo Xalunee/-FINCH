@@ -1,29 +1,23 @@
 import styled from "styled-components";
 
 const StyledButtonRandomize = styled.button`
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
 
   cursor: pointer;
   border: none;
-  background: none;
+  background-color: #ffffff;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("./magic-wand.svg");
 `;
 
-const ImageMagicWand = styled.img.attrs(({ src }) => ({
-  src: src,
-  alt: "Волшебная палочка",
-}))`
-  width: 20px;
-`;
+interface IButtonRandomize {
+  onClick: () => void;
+}
 
-const ButtonRandomize = ({ onClick }: any) => {
-  return (
-    <StyledButtonRandomize onClick={onClick}>
-      <ImageMagicWand
-        src={require("../assets/magic-wand.png")}
-      ></ImageMagicWand>
-    </StyledButtonRandomize>
-  );
+const ButtonRandomize = ({ onClick }: IButtonRandomize) => {
+  return <StyledButtonRandomize onClick={onClick} />;
 };
 
 export default ButtonRandomize;

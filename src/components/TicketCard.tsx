@@ -25,9 +25,6 @@ const Card = styled.div`
 const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-
-  height: 40px;
 `;
 
 const CardTitle = styled.h2`
