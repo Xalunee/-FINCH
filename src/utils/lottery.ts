@@ -27,11 +27,17 @@ export const calculateResult: calculateResultType =
       matchesFirstField >= 4 ||
       (matchesFirstField >= 3 && matchesSecondField === 1);
 
-    // Лог для теста корректности работы - совпадения первого поля, совпадения второго поля, статус выигрыша
-    console.log(matchesFirstField, matchesSecondField, isTicketWon);
+    // Логи для теста корректности работы
+    console.log(
+      `Количество совпавших чисел в первом поле - ${matchesFirstField}`
+    );
+    console.log(
+      `Количество совпавших чисел во втором поле - ${matchesSecondField}`
+    );
+    console.log(`Статус выигрыша - ${isTicketWon}`);
 
     // Отправка данных на апи
-    sendRequest("https://fakegosloto/api", {
+    sendRequest("https://cors-anywhere.herokuapp.com", {
       firstField: cells1,
       secondField: cells2,
       isTicketWon,

@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 interface RequestData {
   firstField: number[];
   secondField: number[];
@@ -21,26 +23,23 @@ const sendRequest: SendRequestFunction = (url, data, retries = 2) => {
   })
     .then((response) => {
       if (response.ok) {
-        console.log("Данные успешно отправлены на сервер");
+        // Вывод уведомления при корректном url и 200 OK
+        toast.info("Данные успешно отправлены на сервер");
         return;
       }
-      // Повторная отправка данных
       if (retries <= 0) {
-        // Логируем ошибку при ошибке сервера или неправильных даннх
-        console.error("Ошибка при отправке данных на сервер", response.status);
+        // Вывод уведомнелия при ошибке сервера или неправильных даннх
+        toast.error(`Ошибка при отправке данных на сервер ${response.status}`);
         return;
       }
-      console.log(
-        `Повторная попытка отправки через 2 секунды. Осталось попыток: ${retries}`
-      );
+      // Через 2 секунды пытаемся ещё раз отправить данные
       setTimeout(() => {
-        // Через 2 секунды делаем ещё раз запрос
         sendRequest(url, data, retries - 1);
       }, 2000);
     })
     .catch((error) => {
-      // Логируем ошибку при некорректном url
-      console.error("Ошибка при отправке данных на сервер:", error);
+      // Вывод уведомления при некорректном url
+      toast.error(`Ошибка при отправке данных на сервер ${error}`);
     });
 };
 
